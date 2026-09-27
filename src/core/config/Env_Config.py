@@ -6,7 +6,7 @@ load_dotenv()
 def get_env(key: str) -> str:
     value = os.getenv(key)
     if not value or not value.strip():
-        raise ConfigurationError(key)
+        raise EnvironmentError(f"Error: Environment variable {key} is not set")
     return value
 
 class Yolo:

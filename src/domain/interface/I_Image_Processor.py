@@ -1,5 +1,4 @@
-import numpy as np
-from typing import List
+from typing_extensions import List
 from abc import ABC, abstractmethod
 from src.domain.entity.Deteccion import Deteccion
 
@@ -10,5 +9,5 @@ class IImageProcessor(ABC):
         pass
 
     @abstractmethod
-    def predict(self, frame: np.ndarray, stream: bool = True) -> List[Deteccion]:
+    def predict(self, frame: object, stream: bool = True) -> List[Deteccion]:
         pass
