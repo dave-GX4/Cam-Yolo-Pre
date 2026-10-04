@@ -11,6 +11,7 @@ def get_env(key: str) -> str:
 
 class Yolo:
     model_yolo = get_env("MODEL_YOLO")
+    hardware_yolo = get_env("HARDWARE_YOLO")
 
 class LocalCam:
     model_cam = get_env("CAMERA_INDEX")

@@ -3,11 +3,9 @@ from src.core.config import Env_Config
 
 def image_processing_service(
     model = Env_Config.Yolo.model_yolo,
-    warmup = Env_Config.Yolo.warmup_yolo,
     hardware = Env_Config.Yolo.hardware_yolo
 ):
     return ImageProcessorImpl(
         model = model,
-        warmup = warmup,
         hardware = hardware
     )

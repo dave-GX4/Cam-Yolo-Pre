@@ -1,13 +1,14 @@
+import numpy as np
 from ultralytics import YOLO
 from typing_extensions import List
 from src.domain.entity.Deteccion import Deteccion
 from src.domain.interface.I_Image_Processor import IImageProcessor
 
 class ImageProcessorImpl(IImageProcessor):
-    def __init__(self, model: str, warmup: bool, hardware: str):
+    def __init__(self, model: str, hardware: str):
         self.model = model
         self.model_instance = None
-        self.warmup = warmup
+        self.warmup = False
         self.hardware = hardware
 
     def load_model(self) -> None:
@@ -17,7 +18,9 @@ class ImageProcessorImpl(IImageProcessor):
             self.model_instance.to(self.hardware)
 
             if self.warmup:
-                self.model_instance(self.model_instance[0])
+                dummy_image = np.zeros((640, 640, 3), dtype=np.uint8)
+                
+                self.model_instance.predict(dummy_image, stream=False, verbose=False)
 
         except Exception as e:
             raise RuntimeError(f"Error al cargar el modelo: {e}")
